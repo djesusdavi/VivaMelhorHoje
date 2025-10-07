@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viva Melhor Hoje</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif;}
+body{background:#f7f9fc;color:#333;overflow-x:hidden;}
+
+/* HEADER COM GRADIENTE ANIMADO E PARTICULAS */
+header{
+  height:300px;
+  position:relative;
+  text-align:center;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+header::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;width:100%;height:100%;
+  background: linear-gradient(-45deg,#1e90ff,#32cd32,#ffd700,#ff69b4);
+  background-size:400% 400%;
+  z-index:-2;
+  animation: gradientBG 16s ease infinite;
+}
+
+@keyframes gradientBG{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+header h1{font-size:2.5rem;margin-bottom:10px;animation:fadeInDown 1.5s ease forwards;position:relative;}
+@keyframes fadeInDown{0%{opacity:0;transform:translateY(-50px);}100%{opacity:1;transform:translateY(0);}}
+
+nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:bold;transition:transform 0.3s;position:relative;}
+nav a:hover{transform:scale(1.1);}
+
+.social-buttons{
+  position:absolute;top:20px;right:20px;z-index:2;
+}
+.social-buttons a{
+  display:inline-block;margin-left:10px;padding:10px 15px;background:#fff;color:#1e90ff;
+  border-radius:5px;font-weight:bold;text-decoration:none;transition:transform 0.3s,box-shadow 0.3s;
+}
+.social-buttons a:hover{transform:scale(1.2) rotate(-3deg);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+
+/* PARTICULAS */
+.particle{position:absolute;border-radius:50%;opacity:0.2;pointer-events:none;animation:float 20s infinite;}
+@keyframes float{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-50px) translateX(30px);}100%{transform:translateY(0) translateX(0);}}
+
+/* CARROSSEL INTERATIVO */
+.carousel-container{
+  width:90%;max-width:900px;height:220px;margin:20px auto;position:relative;overflow:hidden;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.15);z-index:1;
+}
+.carousel-track{
+  display:flex;transition:transform 0.5s ease-in-out;
+}
+.carousel-slide{
+  min-width:100%;display:flex;justify-content:center;align-items:center;font-size:1.8rem;font-weight:bold;color:#fff;height:220px;text-align:center;padding:0 20px;
+}
+.slide1{background:rgba(30,144,255,0.85);}
+.slide2{background:rgba(50,205,50,0.85);}
+.slide3{background:rgba(255,215,0,0.85);color:#000;}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.7);border:none;padding:10px;border-radius:50%;cursor:pointer;z-index:10;
+}
+#prev{left:10px;}
+#next{right:10px;}
+
+/* SEÇÕES COM PARALLAX */
+section{
+  padding:80px 20px;text-align:center;position:relative;overflow:hidden;
+  min-height:400px;
+}
+.section-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;background-size:cover;background-position:center;
+}
+
+/* PARALLAX FIXO PARA DESKTOP */
+@media(min-width:769px){
+  #motivacao .section-bg{background-attachment:fixed;}
+  #saude .section-bg{background-attachment:fixed;}
+  #financas .section-bg{background-attachment:fixed;}
+  #conhecimento .section-bg{background-attachment:fixed;}
+}
+
+/* MOBILE PARALLAX SUAVE */
+@media(max-width:768px){
+  .section-bg{transform:translateY(0px);}
+}
+
+#motivacao .section-bg{background-image:url('https://picsum.photos/id/1015/1200/800');}
+#saude .section-bg{background-image:url('https://picsum.photos/id/1011/1200/800');}
+#financas .section-bg{background-image:url('https://picsum.photos/id/1012/1200/800');}
+#conhecimento .section-bg{background-image:url('https://picsum.photos/id/1016/1200/800');}
+
+.section-title{font-size:2rem;margin-bottom:30px;color:#1e90ff;position:relative;}
+
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;}
+.card{background:rgba(255,255,255,0.95);border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);padding:30px 20px;flex:1 1 250px;max-width:300px;transition:transform 0.4s,box-shadow 0.4s,opacity 0.5s;opacity:0;transform:translateY(50px);}
+.card.show{opacity:1;transform:translateY(0);}
+.card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 30px rgba(0,0,0,0.2);}
+.card h3{color:#32cd32;margin-bottom:15px;}
+.card p{color:#555;}
+
+footer{background:#1e90ff;color:#fff;padding:25px;text-align:center;}
+
+@media(max-width:768px){
+  .cards{flex-direction:column;align-items:center;}
+  .social-buttons{position:static;margin-top:15px;}
+  .carousel-slide{font-size:1.3rem;height:180px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Viva Melhor Hoje</h1>
+<nav>
+<a href="#motivacao">Motivação</a>
+<a href="#saude">Saúde</a>
+<a href="#financas">Finanças</a>
+<a href="#conhecimento">Conhecimento</a>
+</nav>
+<div class="social-buttons">
+<a href="https://www.facebook.com/share/19z3KMfuT7/?mibextid=wwXIfr" target="_blank">Facebook</a>
+<a href="https://wa.me/qr/RHJA2N4ET4WXJ1" target="_blank">WhatsApp</a>
+</div>
+
+<div class="carousel-container">
+  <button id="prev" class="carousel-btn">&#10094;</button>
+  <div class="carousel-track">
+    <div class="carousel-slide slide1">Transforme sua vida</div>
+    <div class="carousel-slide slide2">Cuide do corpo e mente</div>
+    <div class="carousel-slide slide3">Aprenda e cresça todo dia</div>
+  </div>
+  <button id="next" class="carousel-btn">&#10095;</button>
+</div>
+
+</header>
+
+<section id="motivacao">
+<div class="section-bg"></div>
+<h2 class="section-title">Motivação e Evolução</h2>
+<div class="cards">
+<div class="card"><h3>Inspire-se</h3><p>Dicas diárias para manter disciplina, foco e evolução pessoal em todas as áreas da vida.</p></div>
+<div class="card"><h3>Histórias Reais</h3><p>Casos de pessoas que transformaram suas vidas através de hábitos simples e consistentes.</p></div>
+</div>
+</section>
+
+<section id="saude">
+<div class="section-bg"></div>
+<h2 class="section-title">Saúde e Fitness</h2>
+<div class="cards">
+<div class="card"><h3>Treinos e Bem-estar</h3><p>Exercícios práticos e dicas de alimentação saudável para transformar corpo e mente.</p></div>
+<div class="card"><h3>Estilo de Vida Saudável</h3><p>Conteúdos que ajudam a criar hábitos duradouros para qualidade de vida.</p></div>
+</div>
+</section>
+
+<section id="financas">
+<div class="section-bg"></div>
+<h2 class="section-title">Finanças e Inteligência Financeira</h2>
+<div class="cards">
+<div class="card"><h3>Organize Seu Dinheiro</h3><p>Dicas de economia, investimentos e planejamento financeiro para segurança e liberdade.</p></div>
+<div class="card"><h3>Independência Financeira</h3><p>Aprenda a construir patrimônio e alcançar estabilidade a longo prazo.</p></div>
+</div>
+</section>
+
+<section id="conhecimento">
+<div class="section-bg"></div>
+<h2 class="section-title">Aprendizado e Crescimento</h2>
+<div class="cards">
+<div class="card"><h3>Desenvolvimento Pessoal</h3><p>Livros, cursos e dicas práticas para evoluir conhecimento e habilidades.</p></div>
+<div class="card"><h3>Novos Horizontes</h3><p>Descubra oportunidades de aprendizado que transformam sua carreira e vida.</p></div>
+</div>
+</section>
+
+<footer>&copy; 2025 Viva Melhor Hoje. Todos os direitos reservados.</footer>
+
+<script>
+// PARTICULAS
+const headerEl=document.querySelector('header');
+for(let i=0;i<25;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.width=Math.random()*25+5+'px';
+  p.style.height=p.style.width;
+  p.style.top=Math.random()*100+'%';
+  p.style.left=Math.random()*100+'%';
+  p.style.background=['#ffd700','#32cd32','#1e90ff','#ff69b4'][Math.floor(Math.random()*4)];
+  p.style.animationDuration=(10+Math.random()*20)+'s';
+  headerEl.appendChild(p);
+}
+
+// CARROSSEL
+const track=document.querySelector('.carousel-track');
+const slides=Array.from(track.children);
+let current=0;
+document.getElementById('next').addEventListener('click',()=>{current=(current+1)%slides.length;track.style.transform=`translateX(-${current*100}%)`;});
+document.getElementById('prev').addEventListener('click',()=>{current=(current-1+slides.length)%slides.length;track.style.transform=`translateX(-${current*100}%)`;});
+
+// PARALLAX MOBILE SUAVE
+const sections=document.querySelectorAll('section');
+window.addEventListener('scroll',()=>{
+  if(window.innerWidth<=768){
+    sections.forEach(sec=>{
+      const bg=sec.querySelector('.section-bg');
+      const offset=window.pageYOffset - sec.offsetTop;
+      bg.style.transform=`translateY(${offset*0.15}px)`;
+    });
+  }
+});
+
+// SCROLL REVEAL
+const cards=document.querySelectorAll('.card');
+const revealCards=()=>{
+  const triggerBottom=window.innerHeight/5*4;
+  cards.forEach(card=>{
+    const cardTop=card.getBoundingClientRect().top;
+    if(cardTop<triggerBottom){card.classList.add('show');}
+  });
+}
+window.addEventListener('scroll',revealCards);
+window.addEventListener('load',revealCards);
+</script>
+
+</body>
+</html>
